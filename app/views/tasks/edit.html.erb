@@ -1,6 +1,9 @@
-<h1>id: <%= @task.id %> 編集ページ</h1>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
 
-<%= render 'form', task: @task %>
+ <h1>id: <%= @task.id %> 編集ページ</h1>
+  
+ <%= render 'form', task: @task %>
 
-<%= link_to '一覧に戻る', tasks_path %>
-
+ <%= link_to '一覧に戻る', tasks_path %>
+ 
+</div>
