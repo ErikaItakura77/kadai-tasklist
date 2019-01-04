@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'toppages/index'
+
+   root to: 'toppages#index'
+   
   get 'sessions/new'
 
   get 'sessions/create'
