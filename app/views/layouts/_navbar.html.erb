@@ -18,7 +18,13 @@
         <li class="active">
         <li><%= link_to 'Signup', signup_path %></li>
         <li><a href="#">Login</a></li>
-          <%= link_to 'タスク一覧', tasks_path %></li>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Signup', signup_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
+        </ul> 
+        
+        <il><%= link_to 'タスク一覧', tasks_path %></li>
         <li><%= link_to '作成ページ', new_task_path%></li>
         <li><%=link_to '詳細ページ', task_path(@task)%></li>
       </ul>
