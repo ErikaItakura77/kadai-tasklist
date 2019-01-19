@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'タスクの投稿に失敗しました。'
-      render 'toppages/index'
+      render :new
     end
   end
 
@@ -19,11 +19,19 @@ class TasksController < ApplicationController
     flash[:success] = 'タスクを削除しました。'
     redirect_back(fallback_location: root_path)
   end
+  
+  def new
+    @task = Task.new
+  end
+  
+  def index
+    @tasks = current_user.tasks.page(params[:page])
+  end
 
   private
 
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:status, :content)
   end
 
   def correct_user
@@ -33,3 +41,4 @@ class TasksController < ApplicationController
     end
   end
 end
+
