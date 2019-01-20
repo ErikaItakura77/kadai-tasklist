@@ -13,12 +13,6 @@ class TasksController < ApplicationController
       render :new
     end
   end
-
-  def destroy
-    @task.destroy
-    flash[:success] = 'タスクを削除しました。'
-    redirect_back(fallback_location: root_path)
-  end
   
   def new
     @task = Task.new
@@ -26,8 +20,36 @@ class TasksController < ApplicationController
   
   def index
     @tasks = current_user.tasks.page(params[:page])
+    @tasks = Task.order(created_at: :desc).page(params[:page]).per(3)
+  end
+  
+  def show
+    @task = Task.find(params[:id])
   end
 
+  def edit
+     @task = Task.find(params[:id])
+  end
+  
+ def update
+    @task = Task.find(params[:id])
+
+    if @task.update(task_params)
+      flash[:success] = 'Task は正常に更新されました'
+      redirect_to @task
+    else
+      flash.now[:danger] = 'Task は更新されませんでした'
+      render :edit
+    end
+ end
+  
+ def destroy
+    @task.destroy
+    flash[:success] = 'タスクを削除しました。'
+    redirect_to tasks_url
+ end
+  
+  
   private
 
   def task_params
@@ -41,4 +63,5 @@ class TasksController < ApplicationController
     end
   end
 end
+
 
