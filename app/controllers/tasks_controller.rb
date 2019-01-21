@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy, :edit]
 
   def create
     @task = current_user.tasks.build(task_params)
@@ -19,12 +19,13 @@ class TasksController < ApplicationController
   end
   
   def index
-    @tasks = current_user.tasks.page(params[:page])
-    @tasks = Task.order(created_at: :desc).page(params[:page]).per(3)
+    # ログインしているユーザー（current_user）が持っているタスクをデーターベースから取ってきている
+    # 取ってきたタスクを@tasksという変数に代入している
+    @tasks = current_user.tasks.order(created_at: :desc).page(params[:page])
   end
   
   def show
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def edit
@@ -49,11 +50,10 @@ class TasksController < ApplicationController
     redirect_to tasks_url
  end
   
-  
   private
 
   def task_params
-    params.require(:task).permit(:status, :content)
+    params.require(:task).permit(:status, :content, :user_id)
   end
 
   def correct_user
