@@ -9,7 +9,7 @@
       </button>
 
       <!-- ホームへ戻るリンク。ブランドロゴなどを置く。 -->
-      <a class="navbar-brand" href="/tasks">タスクリスト</a>
+      <a class="navbar-brand" href="/login">タスクリスト</a>
     </div>
 
     <!-- メニュー項目 -->
@@ -19,29 +19,15 @@
         <li><%= link_to '作成ページ', new_task_path%></li>
           <% if logged_in? %>
             <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-          <% end %>
-      </ul>
-     </div><!-- /.navbar-collapse -->
-     
-     
-    　<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <% if logged_in? %>
-            <li><%= link_to 'Users', users_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'My profile', user_path(current_user) %></li>
-                <li role="separator" class="divider"></li>
-                <li>Logout</li>
               </ul>
             </li>
           <% end %>
-          </ul>
-      </div>
-      
-        </ul>
-      </div>
+      </ul>
+     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
