@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  
-  get 'taskses/index'
 
-  root to: 'toppages#index'
+  root to: 'tasks#index'
    
   get 'login', to: 'sessions#new'
   post 'login' , to: 'sessions#create'
